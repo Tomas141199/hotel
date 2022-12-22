@@ -8,7 +8,7 @@ const router = require("./routes");
 const app = express();
 
 // Settings
-app.set("port", process.env.PORT || 4000);
+app.set("port", process.env.PORT || 3000);
 app.set("views", path.join(__dirname, "views"));
 app.engine(".hbs", getHBS(path.join(app.get("views"))).engine);
 app.set("view engine", ".hbs");
