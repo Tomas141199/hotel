@@ -18,8 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //js
-app.use('/js', express.static(__dirname + './src/public/js'));
-
+app.use("/js", express.static(__dirname + "./src/public/js"));
 
 // Routes
 app.use(router);

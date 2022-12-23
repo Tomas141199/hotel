@@ -1,16 +1,6 @@
 <div class="container mx-auto">
     <div class="w-8/12 mx-auto">
-        <form action="/reservaciones/add" method="post">
-            <div class="my-4">
-                <input class="border-2 border-gray rounded block w-full p-2" type="text" name="nombre" id="nombre"
-                    placeholder="El nombre del cliente">
-            </div>
-
-            <div class="my-4">
-                <input class="border-2 border-gray rounded block w-full p-2" type="tel" name="telefono" id="telefono"
-                    placeholder="Télefono del cliente">
-            </div>
-
+        <form action="/tours/add" method="post">
             <select name="id_actividad" id="id_actividad" class="my-4 border-2 border-gray rounded block w-full p-2">
                 <option value="" disabled selected>--Seleccione una actividad</option>
                 {{#each actividades}}
@@ -25,11 +15,51 @@
                 {{/each}}
             </select>
 
-            <button id="agregar" class="px-3 py-2 bg-green-500 rounded text-white" type="submit">Agregar</button>
+            <div class="container-fluid">
+                <div class="form-group col-sm-8 border-2 border-gray p-2">
+                    <div id="multi-reservaciones" class="multiselect">
+                        <div id="reservaciones-label" class="selectBox" onclick="toggleReservaciones()">
+                            <select class="form-select">
+                                <option>--Selecciona las reservaciones</option>
+                            </select>
+                            <div class="overSelect"></div>
+                        </div>
+                        <div id="reservaciones-option">
+                            {{#each reservaciones}}
+                                <label for="{{id}}"><input type="checkbox" id={{id}} onchange="reservacionesChange()"
+                                        value="{{id}}" /> {{cliente}} - {{nombre}}
+                                    - {{hora}}</label>
+                            {{/each}}
+                        </div>
+                    </div>
+                    <input type="hidden" name="id_actividades" id="id_actividades" value="">
+                </div>
+            </div>
+
+            <div class="container-fluid mt-4">
+                <div class="form-group col-sm-8 border-2 border-gray p-2">
+                    <div id="multi-trabajadores" class="multiselect">
+                        <div id="trabajadores-label" class="selectBox" onclick="toggleTrabajadores()">
+                            <select class="form-select">
+                                <option>--Selecciona el/los trabajador(es)</option>
+                            </select>
+                            <div class="overSelect"></div>
+                        </div>
+                        <div id="trabajadores-option">
+                            {{#each trabajadores}}
+                                <label for="{{id}}"><input type="checkbox" id={{id}} onchange="trabajadoresChange()"
+                                        value="{{id}}" />{{nombre}}</label>
+                            {{/each}}
+                        </div>
+                    </div>
+                    <input type="hidden" name="id_trabajadores" id="id_trabajadores" value="">
+                </div>
+            </div>
+            <button id="agregar" class="mt-6 px-3 py-2 bg-green-500 rounded text-white" type="submit">Agregar</button>
         </form>
     </div>
 
-    <div class="my-10">
+    {{!-- <div class="my-10">
         <h3 class="text-center">Registros recientes</h3>
         <div class=" mt-5">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 px-10 ">
@@ -78,11 +108,9 @@
                         <td class="text-center font-semibold text-2xl p-4" colspan="5">
                             Aun no hay reservaciones
                         </td>
-
                     {{/each}}
                 </tbody>
             </table>
         </div>
-    </div>
-
+    </div> --}}
 </div>

@@ -9,8 +9,6 @@ const index = async (req, res) => {
   const actividades = await actividades_db.getAll();
   const registros = await reservaciones_db.getAll();
 
-  console.log("Actividades encontradas", actividades);
-
   res.render("reservaciones/index", { horarios, actividades, registros });
 };
 
