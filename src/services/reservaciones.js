@@ -1,5 +1,4 @@
 const pool = require("../config/db");
-
 const reservaciones_db = {};
 
 reservaciones_db.addOne = async (reservacion, id_actividad) => {

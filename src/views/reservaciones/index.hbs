@@ -29,31 +29,53 @@
         </form>
     </div>
 
-    <div class="mt-10">
-        <h3 class="text-center">Registros recientes</h3>
-        {{#each registros}}
-            <div class="flex flex-row gap-2 my-2 w-full justify-around">
-                <div class="flex flex-row gap-2">
-                    <div>
-                        {{cliente}}
-                    </div>
-                    <div>
-                        {{telefono}}
-                    </div>
-                    <div>
-                        {{horario}}
-                    </div>
-                    <div>
-                        {{nombre}}
-                    </div>
-                </div>
-                <div>
-                    <a href="/reservaciones/delete/{{id}}"
-                        class="px-2 py-1 text-white bg-red-400 rounded">Eliminar-id</a>
-                </div>
-            </div>
-        {{/each}}
-
+    <div class="my-10">
+        <h3 class="text-center">Registros recientes</h3>        
+        <div class=" mt-5">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 px-10 ">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="py-3 px-6">
+                            Cliente
+                        </th>
+                        <th scope="col" class="py-3 px-6">
+                            Telefono
+                        </th>
+                        <th scope="col" class="py-3 px-6">
+                            Horario
+                        </th>
+                        <th scope="col" class="py-3 px-6">
+                            Actividad 
+                        </th>
+                        <th scope="col" class="py-3 px-6">
+                            Accion 
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each registros}}
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="py-4 px-6 font-medium text-white">
+                            {{cliente}}
+                        </th>
+                        <td class="py-4 px-6">
+                            {{telefono}}
+                        </td>
+                        <td class="py-4 px-6">
+                            {{hora}} - Horas
+                        </td>
+                        <td class="py-4 px-6">
+                            {{nombre}}
+                        </td>
+                        <td class="py-4 px-6">
+                            <a href="/reservaciones/delete/{{id}}"
+                                class="px-2 py-1 text-white bg-red-400 rounded">Eliminar</a>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </div>
