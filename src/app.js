@@ -15,6 +15,7 @@ app.set("view engine", ".hbs");
 
 // Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // Routes
 app.use(router);

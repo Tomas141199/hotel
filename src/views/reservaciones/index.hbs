@@ -1,0 +1,59 @@
+<div class="container mx-auto">
+    <div class="w-8/12 mx-auto">
+        <form action="/reservaciones/add" method="post">
+            <div class="my-4">
+                <input class="border-2 border-gray rounded block w-full p-2" type="text" name="nombre" id="nombre"
+                    placeholder="El nombre del cliente">
+            </div>
+
+            <div class="my-4">
+                <input class="border-2 border-gray rounded block w-full p-2" type="tel" name="telefono" id="telefono"
+                    placeholder="Télefono del cliente">
+            </div>
+
+            <select name="id_actividad" id="id_actividad" class="my-4 border-2 border-gray rounded block w-full p-2">
+                <option value="" disabled selected>--Seleccione una actividad</option>
+                {{#each actividades}}
+                    <option value={{id}}>{{nombre}}</option>
+                {{/each}}
+            </select>
+
+            <select name="id_horario" id="id_horario" class="my-4 border-2 border-gray rounded block w-full p-2">
+                <option value="" disabled selected>--Selecciona un horario</option>
+                {{#each horarios}}
+                    <option value={{id}}>{{hora}}</option>
+                {{/each}}
+            </select>
+
+            <button class="px-3 py-2 bg-green-500 rounded text-white" type="submit">Agregar</button>
+        </form>
+    </div>
+
+    <div class="mt-10">
+        <h3 class="text-center">Registros recientes</h3>
+        {{#each registros}}
+            <div class="flex flex-row gap-2 my-2 w-full justify-around">
+                <div class="flex flex-row gap-2">
+                    <div>
+                        {{cliente}}
+                    </div>
+                    <div>
+                        {{telefono}}
+                    </div>
+                    <div>
+                        {{horario}}
+                    </div>
+                    <div>
+                        {{nombre}}
+                    </div>
+                </div>
+                <div>
+                    <a href="/reservaciones/delete/{{id}}"
+                        class="px-2 py-1 text-white bg-red-400 rounded">Eliminar-id</a>
+                </div>
+            </div>
+        {{/each}}
+
+    </div>
+
+</div>
