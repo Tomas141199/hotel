@@ -1,3 +1,4 @@
+
 <div class="container mx-auto">
     <div class="w-8/12 mx-auto">
         <form action="/reservaciones/add" method="post">
@@ -25,7 +26,7 @@
                 {{/each}}
             </select>
 
-            <button class="px-3 py-2 bg-green-500 rounded text-white" type="submit">Agregar</button>
+            <button id="agregar" class="px-3 py-2 bg-green-500 rounded text-white" type="submit">Agregar</button>
         </form>
     </div>
 
@@ -79,3 +80,24 @@
     </div>
 
 </div>
+{{!-- <script type="text/javascript">
+    const button = document.querySelector("#agregar");
+    const nombre = document.querySelector("#nombre");
+    const telefono = document.querySelector("#telefono");
+    const actividad = document.querySelector("#id_actividad");
+    const horario = document.querySelector("#id_horario");
+
+     button.addEventListener("click",(e)=>{
+        e.target.preventDefault();
+        if(nombre.value.length < 1 || telefono.value.length < 1 || actividad.value == "" || horario.value == "" )
+        {
+            Swal.fire({
+            title: 'Error!',
+            text: 'Llena todos los Campos para continuar',
+            icon: 'error',
+            confirmButtonText: 'De acuerdo'
+            })
+        }
+        
+    })
+ </script> --}}
