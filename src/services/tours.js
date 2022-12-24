@@ -41,5 +41,22 @@ tours_db.getReservations = async () => {
   return result;
 };
 
+tours_db.existsById = async (id) => {
+  const result = await pool.query(
+    "SELECT * FROM reservaciones_tour WHERE id_reservacion=?",
+    [id]
+  );
+  return Object.entries(result).length === 0;
+};
+
+tours_db.delOne = async (id) => {
+  try {
+    await pool.query("DELETE FROM reservaciones_tour WHERE id_tour=?", [id]);
+    await pool.query("DELETE FROM tours WHERE id=?", [id]);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
 
 module.exports = tours_db;

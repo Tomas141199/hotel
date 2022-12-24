@@ -93,7 +93,7 @@
                                 {{tour_id}}
                             </td>
                             <td class="py-4 px-6">
-                                <a href="/tours/delete/{{id}}"
+                                <a href="/tours/delete/{{tour_id}}"
                                     class="px-2 py-1 text-white bg-red-400 rounded">Eliminar</a>
                             </td>
                         </tr>
@@ -109,7 +109,7 @@
     </div>
 
     <div class="my-10">
-        <h3 class="text-center">Tours</h3>
+        <h3 class="text-center">Reservaciones - Tours</h3>
         <div class=" mt-5">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 px-10 ">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -128,9 +128,6 @@
                         </th>
                         <th scope="col" class="py-3 px-6">
                             Nombre del cliente
-                        </th>
-                        <th scope="col" class="py-3 px-6">
-                            Accion
                         </th>
                     </tr>
                 </thead>
@@ -153,15 +150,11 @@
                             <td class="py-4 px-6">
                                 {{nombre_cliente}}
                             </td>
-                            <td class="py-4 px-6">
-                                <a href="/tours/delete/{{id}}"
-                                    class="px-2 py-1 text-white bg-red-400 rounded">Eliminar</a>
-                            </td>
                         </tr>
 
                     {{else}}
                         <td class="text-center font-semibold text-2xl p-4" colspan="5">
-                            Aun no hay tours
+                            Aun no hay reservaciones-tours
                         </td>
                     {{/each}}
                 </tbody>
