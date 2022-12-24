@@ -14,8 +14,15 @@ const index = async (req, res) => {
 
 const add = async (req, res) => {
   const { nombre, telefono, id_actividad, id_horario } = req.body;
-  const reservacion = { nombre, telefono, id_horario };
-  await reservaciones_db.addOne(reservacion, id_actividad);
+  //aqui vamos a usar el flash
+  if( nombre == "" || telefono== ""||id_actividad == "" ||id_horario=="" ){
+    req.flash("camposVacios","Rellena todos los campos para continuar");
+  }else{
+    const reservacion = { nombre, telefono, id_horario };
+    await reservaciones_db.addOne(reservacion, id_actividad);
+    req.flash("Exito","la reservación se creó exitosamente");
+  }
+  
 
   res.redirect("/reservaciones");
 };

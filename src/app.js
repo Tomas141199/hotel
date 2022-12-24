@@ -3,6 +3,8 @@ const path = require("path");
 const getHBS = require("./config/hbs");
 const { database } = require("./config/db");
 const router = require("./routes");
+const flash = require("connect-flash");
+const session = require("express-session");
 
 // Init
 const app = express();
@@ -16,9 +18,20 @@ app.set("view engine", ".hbs");
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized:true
+}));
+app.use(flash());
 
-//js
-app.use("/js", express.static(__dirname + "./src/public/js"));
+//global variables
+app.use((req,res,next) =>{
+  res.locals.succes_msg = req.flash('Exito');
+  res.locals.error_msg = req.flash('Fallo');
+  res.locals.vacio_msg = req.flash('camposVacios');
+  next();
+})
 
 // Routes
 app.use(router);

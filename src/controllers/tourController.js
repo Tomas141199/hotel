@@ -25,8 +25,14 @@ const index = async (req, res) => {
 
 const add = async (req, res) => {
   console.log(req.body);
-  const data = req.body;
-  await tours_db.addOne(data);
+  if(req.body.id_actividades == '' || req.body.id_trabajadores ==''){
+    req.flash("camposVacios","Rellena todos los campos para continuar");
+  }else{
+    const data = req.body;
+    await tours_db.addOne(data);
+    req.flash("Exito","Se ha creado el tour correctamente");
+  }
+  
   res.redirect("/tours");
 };
 
