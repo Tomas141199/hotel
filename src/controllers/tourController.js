@@ -11,11 +11,15 @@ const index = async (req, res) => {
   const horarios = await horarios_db.getAll();
   const reservaciones = await reservaciones_db.getAll();
   const trabajadores = await trabajadores_db.getAll();
+  const registros_tours= await tours_db.getTimesActivities();
+  const registros_reservaciones= await tours_db.getReservations();
   res.render("tour/index", {
     reservaciones,
     trabajadores,
     actividades,
     horarios,
+    registros_tours,
+    registros_reservaciones,
   });
 };
 

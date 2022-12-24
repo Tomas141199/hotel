@@ -25,4 +25,21 @@ tours_db.addOne = async (data) => {
   }
 };
 
+tours_db.getTimesActivities = async () => {
+  const result = await pool.query(
+    "SELECT h.hora as horario, a.nombre as actividad, t.id as tour_id from tours as t inner join horarios as h on t.id_horario = h.id inner join actividades as a on t.id_actividad = a.id"
+  );
+
+  return result;
+};
+
+tours_db.getReservations = async () => {
+  const result = await pool.query(
+    "SELECT r.id as id_reservacion, r.nombre as nombre_cliente, rt.id_tour as tour, ar.id_actividad as id_actividad, r.id_horario as id_horario  from reservaciones_tour as rt inner join reservacion as r on r.id = rt.id_reservacion inner join actividad_reservacion as ar on ar.id_reservacion=r.id order by rt.id_tour"
+  );
+
+  return result;
+};
+
+
 module.exports = tours_db;
