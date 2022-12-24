@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 21-12-2022 a las 18:22:06
--- Versión del servidor: 10.4.17-MariaDB
--- Versión de PHP: 8.0.0
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 23-12-2022 a las 23:40:28
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,24 +20,39 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `hotel`
 --
-DROP SCHEMA IF EXISTS `hotel` ;
-
--- -----------------------------------------------------
--- Schema hotel
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `hotel` DEFAULT CHARACTER SET utf8 ;
-USE `hotel` ;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Actividades`
+-- Estructura de tabla para la tabla `actividades`
 --
 
-CREATE TABLE `Actividades` (
+CREATE TABLE `actividades` (
   `id` int(11) NOT NULL,
-  `nombre` nvarchar(10)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `nombre` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `actividades`
+--
+
+INSERT INTO `actividades` (`id`, `nombre`) VALUES
+(1, 'ATV'),
+(2, 'MDTB'),
+(3, 'BDA'),
+(4, 'X3'),
+(5, 'RC'),
+(6, 'CBR'),
+(7, 'HBN'),
+(8, 'KORA'),
+(9, 'HCOMBO'),
+(10, 'ORC'),
+(11, 'ORCM'),
+(12, 'ORH'),
+(13, 'ORHM'),
+(14, 'OFF'),
+(15, 'ORCA'),
+(16, 'BIKE');
 
 -- --------------------------------------------------------
 
@@ -49,48 +64,83 @@ CREATE TABLE `actividad_reservacion` (
   `id_reservacion` int(11) NOT NULL,
   `id_actividad` int(11) NOT NULL,
   `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `actividad_reservacion`
+--
+
+INSERT INTO `actividad_reservacion` (`id_reservacion`, `id_actividad`, `id`) VALUES
+(16, 2, 14),
+(17, 6, 15),
+(18, 3, 16);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Departamentos`
+-- Estructura de tabla para la tabla `departamentos`
 --
 
-CREATE TABLE `Departamentos` (
+CREATE TABLE `departamentos` (
   `id` int(11) NOT NULL,
   `nombre` varchar(55) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `Departamentos`
+-- Volcado de datos para la tabla `departamentos`
 --
 
-INSERT INTO `Departamentos` (`id`, `nombre`) VALUES
+INSERT INTO `departamentos` (`id`, `nombre`) VALUES
 (1, 'Guía'),
 (2, 'Fotógrafo');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Horarios`
+-- Estructura de tabla para la tabla `horarios`
 --
 
-CREATE TABLE `Horarios` (
+CREATE TABLE `horarios` (
   `id` int(11) NOT NULL,
-  `hora` nvarchar(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `hora` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `horarios`
+--
+
+INSERT INTO `horarios` (`id`, `hora`) VALUES
+(1, '8:00'),
+(2, '9:00'),
+(3, '10:00'),
+(4, '11:00'),
+(5, '12:00'),
+(6, '13:00'),
+(7, '14:00'),
+(8, '15:00'),
+(9, '16:00');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Reservacion`
+-- Estructura de tabla para la tabla `reservacion`
 --
 
-CREATE TABLE `Reservacion` (
+CREATE TABLE `reservacion` (
   `id` int(11) NOT NULL,
-  `id_horario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `id_horario` int(11) NOT NULL,
+  `nombre` varchar(60) NOT NULL,
+  `telefono` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reservacion`
+--
+
+INSERT INTO `reservacion` (`id`, `id_horario`, `nombre`, `telefono`) VALUES
+(16, 2, 'Playera', '2481366503'),
+(17, 3, 'Karina', '2481366503'),
+(18, 3, 'Playera', '2481822516');
 
 -- --------------------------------------------------------
 
@@ -102,37 +152,53 @@ CREATE TABLE `reservaciones_tour` (
   `id` int(11) NOT NULL,
   `id_reservacion` int(11) NOT NULL,
   `id_tour` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reservaciones_tour`
+--
+
+INSERT INTO `reservaciones_tour` (`id`, `id_reservacion`, `id_tour`) VALUES
+(1, 16, 2),
+(2, 17, 2),
+(3, 18, 2);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Tours`
+-- Estructura de tabla para la tabla `tours`
 --
 
-CREATE TABLE `Tours` (
+CREATE TABLE `tours` (
   `id` int(11) NOT NULL,
   `id_horario` int(11) NOT NULL,
   `id_actividad` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tours`
+--
+
+INSERT INTO `tours` (`id`, `id_horario`, `id_actividad`) VALUES
+(2, 2, 2);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Trabajadores`
+-- Estructura de tabla para la tabla `trabajadores`
 --
 
-CREATE TABLE `Trabajadores` (
+CREATE TABLE `trabajadores` (
   `id` int(11) NOT NULL,
   `id_departamento` int(11) NOT NULL,
   `nombre` varchar(55) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `Trabajadores`
+-- Volcado de datos para la tabla `trabajadores`
 --
 
-INSERT INTO `Trabajadores` (`id`, `id_departamento`, `nombre`) VALUES
+INSERT INTO `trabajadores` (`id`, `id_departamento`, `nombre`) VALUES
 (1, 1, 'Luis Maupome Garcia'),
 (2, 2, 'Tomas Galloso Toledano');
 
@@ -141,9 +207,9 @@ INSERT INTO `Trabajadores` (`id`, `id_departamento`, `nombre`) VALUES
 --
 
 --
--- Indices de la tabla `Actividades`
+-- Indices de la tabla `actividades`
 --
-ALTER TABLE `Actividades`
+ALTER TABLE `actividades`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -155,21 +221,21 @@ ALTER TABLE `actividad_reservacion`
   ADD KEY `id_reservacion` (`id_reservacion`);
 
 --
--- Indices de la tabla `Departamentos`
+-- Indices de la tabla `departamentos`
 --
-ALTER TABLE `Departamentos`
+ALTER TABLE `departamentos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `Horarios`
+-- Indices de la tabla `horarios`
 --
-ALTER TABLE `Horarios`
+ALTER TABLE `horarios`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `Reservacion`
+-- Indices de la tabla `reservacion`
 --
-ALTER TABLE `Reservacion`
+ALTER TABLE `reservacion`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_horario` (`id_horario`);
 
@@ -182,18 +248,18 @@ ALTER TABLE `reservaciones_tour`
   ADD KEY `id_tour` (`id_tour`);
 
 --
--- Indices de la tabla `Tours`
+-- Indices de la tabla `tours`
 --
-ALTER TABLE `Tours`
+ALTER TABLE `tours`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_horario` (`id_horario`),
   ADD KEY `id_horario_2` (`id_horario`),
   ADD KEY `id_actividad` (`id_actividad`);
 
 --
--- Indices de la tabla `Trabajadores`
+-- Indices de la tabla `trabajadores`
 --
-ALTER TABLE `Trabajadores`
+ALTER TABLE `trabajadores`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_departamento` (`id_departamento`);
 
@@ -202,51 +268,51 @@ ALTER TABLE `Trabajadores`
 --
 
 --
--- AUTO_INCREMENT de la tabla `Actividades`
+-- AUTO_INCREMENT de la tabla `actividades`
 --
-ALTER TABLE `Actividades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `actividades`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `actividad_reservacion`
 --
 ALTER TABLE `actividad_reservacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT de la tabla `Departamentos`
+-- AUTO_INCREMENT de la tabla `departamentos`
 --
-ALTER TABLE `Departamentos`
+ALTER TABLE `departamentos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `Horarios`
+-- AUTO_INCREMENT de la tabla `horarios`
 --
-ALTER TABLE `Horarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `horarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT de la tabla `Reservacion`
+-- AUTO_INCREMENT de la tabla `reservacion`
 --
-ALTER TABLE `Reservacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `reservacion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `reservaciones_tour`
 --
 ALTER TABLE `reservaciones_tour`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `Tours`
+-- AUTO_INCREMENT de la tabla `tours`
 --
-ALTER TABLE `Tours`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tours`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `Trabajadores`
+-- AUTO_INCREMENT de la tabla `trabajadores`
 --
-ALTER TABLE `Trabajadores`
+ALTER TABLE `trabajadores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -257,68 +323,46 @@ ALTER TABLE `Trabajadores`
 -- Filtros para la tabla `actividad_reservacion`
 --
 ALTER TABLE `actividad_reservacion`
-  ADD CONSTRAINT `actividad_reservacion_ibfk_1` FOREIGN KEY (`id_actividad`) REFERENCES `Actividades` (`id`),
-  ADD CONSTRAINT `actividad_reservacion_ibfk_2` FOREIGN KEY (`id_reservacion`) REFERENCES `Reservacion` (`id`);
+  ADD CONSTRAINT `actividad_reservacion_ibfk_1` FOREIGN KEY (`id_actividad`) REFERENCES `actividades` (`id`),
+  ADD CONSTRAINT `actividad_reservacion_ibfk_2` FOREIGN KEY (`id_reservacion`) REFERENCES `reservacion` (`id`);
 
 --
--- Filtros para la tabla `Reservacion`
+-- Filtros para la tabla `reservacion`
 --
-ALTER TABLE `Reservacion`
-  ADD CONSTRAINT `reservacion_ibfk_1` FOREIGN KEY (`id_horario`) REFERENCES `Horarios` (`id`);
+ALTER TABLE `reservacion`
+  ADD CONSTRAINT `reservacion_ibfk_1` FOREIGN KEY (`id_horario`) REFERENCES `horarios` (`id`);
 
 --
 -- Filtros para la tabla `reservaciones_tour`
 --
 ALTER TABLE `reservaciones_tour`
-  ADD CONSTRAINT `reservaciones_tour_ibfk_1` FOREIGN KEY (`id_tour`) REFERENCES `Tours` (`id`),
-  ADD CONSTRAINT `reservaciones_tour_ibfk_2` FOREIGN KEY (`id_reservacion`) REFERENCES `Reservacion` (`id`);
+  ADD CONSTRAINT `reservaciones_tour_ibfk_1` FOREIGN KEY (`id_tour`) REFERENCES `tours` (`id`),
+  ADD CONSTRAINT `reservaciones_tour_ibfk_2` FOREIGN KEY (`id_reservacion`) REFERENCES `reservacion` (`id`);
 
 --
--- Filtros para la tabla `Tours`
+-- Filtros para la tabla `tours`
 --
-ALTER TABLE `Tours`
-  ADD CONSTRAINT `tours_ibfk_1` FOREIGN KEY (`id_horario`) REFERENCES `Horarios` (`id`),
-  ADD CONSTRAINT `tours_ibfk_2` FOREIGN KEY (`id_actividad`) REFERENCES `Actividades` (`id`);
+ALTER TABLE `tours`
+  ADD CONSTRAINT `tours_ibfk_1` FOREIGN KEY (`id_horario`) REFERENCES `horarios` (`id`),
+  ADD CONSTRAINT `tours_ibfk_2` FOREIGN KEY (`id_actividad`) REFERENCES `actividades` (`id`);
 
 --
--- Filtros para la tabla `Trabajadores`
+-- Filtros para la tabla `trabajadores`
 --
-ALTER TABLE `Trabajadores`
-  ADD CONSTRAINT `trabajadores_ibfk_1` FOREIGN KEY (`id_departamento`) REFERENCES `Departamentos` (`id`);
+ALTER TABLE `trabajadores`
+  ADD CONSTRAINT `trabajadores_ibfk_1` FOREIGN KEY (`id_departamento`) REFERENCES `departamentos` (`id`);
+  
+  
 COMMIT;
+
+SELECT r.id ,r.nombre as cliente, r.telefono, h.hora, a.nombre FROM reservacion as r INNER JOIN horarios as h ON r.id_horario = h.id INNER JOIN actividad_reservacion as ar ON r.id = ar.id_reservacion INNER JOIN actividades as a ON ar.id_actividad = a.id;
+
+SELECT * from tours;
+
+SELECT h.hora as horario, a.nombre as actividad, t.id as tour_id from tours as t inner join horarios as h on t.id_horario = h.id inner join actividades as a on t.id_actividad = a.id;
+
+SELECT r.id as id_reservacion, r.nombre as nombre_cliente, rt.id_tour as tour, ar.id_actividad as id_actividad, r.id_horario as id_horario  from reservaciones_tour as rt inner join reservacion as r on r.id = rt.id_reservacion inner join actividad_reservacion as ar on ar.id_reservacion=r.id order by rt.id_tour;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-insert into `Actividades` (`id`, `nombre`) values 
-(1,'ATV'),
-(2,'MDTB'),
-(3,'BDA'),
-(4,'X3'),
-(5,'RC'),
-(6,'CBR'),
-(7,'HBN'),
-(8,'KORA'),
-(9,'HCOMBO'),
-(10,'ORC'),
-(11,'ORCM'),
-(12,'ORH'),
-(13,'ORHM'),
-(14,'OFF'),
-(15,'ORCA'),
-(16,'BIKE');
-SELECT * FROM `Actividades`;
-
-insert into `Horarios` (`id`, `hora`) values 
-(1,'8;00'),
-(2,'9;00'),
-(3,'10;00'),
-(4,'11;00'),
-(5,'12;00'),
-(6,'13;00'),
-(7,'14;00'),
-(8,'15;00'),
-(9,'16;00');
-
-SELECT * FROM `Horarios`;
